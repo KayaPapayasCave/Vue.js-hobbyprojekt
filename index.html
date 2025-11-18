@@ -2,18 +2,26 @@
 <html lang="da">
 <head>
   <meta charset="UTF-8">
-  <title>Lav din egen Labubu</title>
+  <title></title>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div id="app">
+  <div id="app" class="app-container">
 
-    <h1>Lav din egen Labubu</h1>
+    <h1>Make your own Monster</h1>
 
-    <input type="text" v-model="newName" placeholder="Navn på Labubu">
-    <input type="color" v-model="newColor">
+    <input type="text" v-model="newName" placeholder="Name your monster">
+    <div class="color-palette">
+      <div 
+        v-for="color in palette"
+        :key="color"
+        class="color-swatch"
+        :style="{ backgroundColor: color }"
+        @click="newColor = color">
+      </div>
+    </div>
 
     <select v-model="newRarity">
       <option value="common">Common</option>
@@ -24,30 +32,27 @@
       <option value="mythic">Mythic</option>
     </select>
 
-    <button v-on:click="addLabubu">Tilføj Labubu</button>
+    <button v-on:click="addMonster">Add monster</button>
 
-    <p v-if="monsters.length === 0">Der er ingen monstre endnu 😢</p>
-    <p v-else>Du har {{ monsters.length }} monster(e)</p>
+    <p v-if="monsters.length === 0">There's no monster yet😢</p>
+    <p v-else>You have {{ monsters.length }} monster(s)</p>
 
     <div v-for="(monster, index) in monsters" 
          :key="index" 
          class="monster-card"
          :style="{ backgroundColor: monster.color }">
-
       <h3>{{ monster.name }}</h3>
-
-
-      <span v-show="monster.rarity === 'common'" class="rare-badge">🪨 Rare</span>
-      <span v-show="monster.rarity === 'uncommon'" class="rare-badge">🍀 Epic</span>
+      <span v-show="monster.rarity === 'common'" class="common-badge">🪨 Common</span>
+      <span v-show="monster.rarity === 'uncommon'" class="epic-badge">🍀 Epic</span>
       <span v-show="monster.rarity === 'rare'" class="rare-badge">⭐ Rare</span>
-      <span v-show="monster.rarity === 'epic'" class="rare-badge">💎 Epic</span>
-      <span v-show="monster.rarity === 'legendary'" class="rare-badge">🔥 Legendary</span>
-      <span v-show="monster.rarity === 'mythic'" class="rare-badge">🌈 Mythic</span>
+      <span v-show="monster.rarity === 'epic'" class="epic-badge">💎 Epic</span>
+      <span v-show="monster.rarity === 'legendary'" class="legendary-badge">🔥 Legendary</span>
+      <span v-show="monster.rarity === 'mythic'" class="mythic-badge">🌈 Mythic</span>
+
+      <button @click="deleteMonster(index)" class="delete-btn">Delete</button>
 
     </div>
-
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>

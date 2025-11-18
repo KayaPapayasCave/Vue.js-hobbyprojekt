@@ -1,21 +1,57 @@
-.monster-card {
-      width: 180px;
-      padding: 1rem;
-      margin: 0.5rem;
-      border-radius: 12px;
-      color: #333;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      font-family: Arial;
-      display: inline-block;
-      text-align: center;
-    }
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f7f7f7;
+  margin: 0;
+}
 
-    .rare-badge {
-      background: gold;
-      color: black;
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-size: 12px;
-      margin-top: 5px;
-      display: inline-block;
-    }
+.app-container {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  width: 700px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.color-palette {
+  display: grid;
+  grid-template-columns: repeat(6, 30px);
+  gap: 10px;
+  margin: 10px 0 20px;
+  justify-content: center;
+}
+
+.color-swatch {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 0 4px rgba(0,0,0,0.2);
+}
+
+.color-swatch:hover {
+  transform: scale(1.15);
+}
+
+.monster-card {
+  width: 180px;
+  padding: 1rem;
+  margin: 0.5rem;
+  border-radius: 12px;
+  color: #333;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  font-family: Arial;
+  display: inline-block;
+  text-align: center;
+}
+
+.delete-btn {
+  display: block;
+  margin: 10px auto 0;
+}
+
