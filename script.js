@@ -1,29 +1,30 @@
-new Vue({
-      el: '#app',
-      data: {
-        newName: "",
-        newMood: "",
-        newColor: "#ffb6c1",
-        newRarity: "common",
+const App = Vue.createApp({
+  data() {
+    return {
+      newName: "",
+      newColor: "#ffb6c1",
+      newRarity: "common",
 
-        monsters: [
-          { name: "Fluffu", mood: "glad", color: "#ffe4e1", rarity: "rare" },
-          { name: "Gnask", mood: "sur", color: "#c2f0fc", rarity: "common" }
-        ]
-      },
-      methods: {
-        addMonster() {
-          if (this.newName.trim() === "" || this.newMood.trim() === "") return;
+      monsters: [
+        { name: "Fluffy", color: "#ffe4e1", rarity: "common" },
+        { name: "Gromp", color: "#c2f0fc", rarity: "uncommon" }
+      ]
+    };
+  },
 
-          this.monsters.push({
-            name: this.newName,
-            mood: this.newMood,
-            color: this.newColor,
-            rarity: this.newRarity
-          });
+  methods: {
+    addLabubu() {
+      if (this.newName.trim() === "") return;
 
-          this.newName = "";
-          this.newMood = "";
-        }
-      }
-    });
+      this.monsters.push({
+        name: this.newName,
+        color: this.newColor,
+        rarity: this.newRarity
+      });
+
+      this.newName = "";
+    }
+  }
+});
+
+App.mount('#app');

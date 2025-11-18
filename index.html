@@ -2,42 +2,52 @@
 <html lang="da">
 <head>
   <meta charset="UTF-8">
-  <title>Monster Makers</title>
-  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <title>Lav din egen Labubu</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
+
   <div id="app">
 
-    <h1>Monster Makers</h1>
+    <h1>Lav din egen Labubu</h1>
 
-    <!-- FORM TIL AT TILFØJE MONSTRE -->
-    <input type="text" v-model="newName" placeholder="Navn på monster">
-    <input type="text" v-model="newMood" placeholder="Humør">
-    <input type="color" v-model="newColor" title="Vælg farve">
+    <input type="text" v-model="newName" placeholder="Navn på Labubu">
+    <input type="color" v-model="newColor">
 
     <select v-model="newRarity">
       <option value="common">Common</option>
+      <option value="uncommon">Uncommon</option>
       <option value="rare">Rare</option>
+      <option value="epic">Epic</option>
+      <option value="legendary">Legendary</option>
+      <option value="mythic">Mythic</option>
     </select>
 
-    <button v-on:click="addMonster">Tilføj monster</button>
+    <button v-on:click="addLabubu">Tilføj Labubu</button>
 
     <p v-if="monsters.length === 0">Der er ingen monstre endnu 😢</p>
     <p v-else>Du har {{ monsters.length }} monster(e)</p>
 
-    <!-- LISTE OVER MONSTRE -->
-    <div v-for="(monster, index) in monsters" :key="index"
+    <div v-for="(monster, index) in monsters" 
+         :key="index" 
          class="monster-card"
-         v-bind:style="{ backgroundColor: monster.color }">
+         :style="{ backgroundColor: monster.color }">
 
       <h3>{{ monster.name }}</h3>
 
-      <p v-if="monster.mood === 'glad'">😄 Det her monster er rigtig glad!</p>
-      <p v-else>😐 Dette monster er lidt neutralt eller sur.</p>
 
-      <p>Humør: {{ monster.mood }}</p>
-
+      <span v-show="monster.rarity === 'common'" class="rare-badge">🪨 Rare</span>
+      <span v-show="monster.rarity === 'uncommon'" class="rare-badge">🍀 Epic</span>
       <span v-show="monster.rarity === 'rare'" class="rare-badge">⭐ Rare</span>
+      <span v-show="monster.rarity === 'epic'" class="rare-badge">💎 Epic</span>
+      <span v-show="monster.rarity === 'legendary'" class="rare-badge">🔥 Legendary</span>
+      <span v-show="monster.rarity === 'mythic'" class="rare-badge">🌈 Mythic</span>
+
     </div>
+
   </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
