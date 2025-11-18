@@ -19,6 +19,7 @@
         :key="color"
         class="color-swatch"
         :style="{ backgroundColor: color }"
+        :class="{ selected: newColor === color }"
         @click="newColor = color">
       </div>
     </div>
@@ -32,7 +33,7 @@
       <option value="mythic">Mythic</option>
     </select>
 
-    <button v-on:click="addMonster">Add monster</button>
+    <button v-on:click="addMonster" class="add-btn" >Add monster</button>
 
     <p v-if="monsters.length === 0">There's no monster yet😢</p>
     <p v-else>You have {{ monsters.length }} monster(s)</p>
