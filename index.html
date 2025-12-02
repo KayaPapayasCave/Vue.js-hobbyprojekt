@@ -4,53 +4,76 @@
   <meta charset="UTF-8">
   <title></title>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="CSS/app-container.css">
+  <link rel="stylesheet" href="CSS/body.css">
+  <link rel="stylesheet" href="CSS/buttons.css">
+  <link rel="stylesheet" href="CSS/color-palette-and-swatch.css">
+  <link rel="stylesheet" href="CSS/monster-card.css">
+  <link rel="stylesheet" href="CSS/preview-container.css">
 </head>
 <body>
+  <div class="page-wrapper"></div>
+    <div id="app" class="app-container">
 
-  <div id="app" class="app-container">
+      <h1>Make your own Monster👽</h1>
 
-    <h1>Make your own Monster</h1>
-
-    <input type="text" v-model="newName" placeholder="Name your monster">
-    <div class="color-palette">
-      <div 
-        v-for="color in palette"
-        :key="color"
-        class="color-swatch"
-        :style="{ backgroundColor: color }"
-        :class="{ selected: newColor === color }"
-        @click="newColor = color">
+      <input type="text" v-model="newName" placeholder="Name your monster">
+      <div class="color-palette">
+        <div 
+          v-for="color in palette"
+          :key="color"
+          class="color-swatch"
+          :style="{ backgroundColor: color }"
+          :class="{ selected: newColor === color }"
+          @click="newColor = color">
+        </div>
       </div>
-    </div>
 
-    <select v-model="newRarity">
-      <option value="common">Common</option>
-      <option value="uncommon">Uncommon</option>
-      <option value="rare">Rare</option>
-      <option value="epic">Epic</option>
-      <option value="legendary">Legendary</option>
-      <option value="mythic">Mythic</option>
-    </select>
+      <select v-model="newRarity">
+        <option value="" disabled selected hidden>Choose rarity</option>
+        <option value="common">Common</option>
+        <option value="uncommon">Uncommon</option>
+        <option value="rare">Rare</option>
+        <option value="epic">Epic</option>
+        <option value="legendary">Legendary</option>
+        <option value="mythic">Mythic</option>
+      </select>
 
-    <button v-on:click="addMonster" class="add-btn" >Add monster</button>
+      <button v-on:click="addMonster" class="add-btn" >Add monster</button>
 
-    <p v-if="monsters.length === 0">There's no monster yet😢</p>
-    <p v-else>You have {{ monsters.length }} monster(s)</p>
+      <p v-if="monsters.length === 0">There's no monster yet😢</p>
+      <p v-else>You have {{ monsters.length }} monster(s)</p>
 
-    <div v-for="(monster, index) in monsters" 
-         :key="index" 
-         class="monster-card"
-         :style="{ backgroundColor: monster.color }">
-      <h3>{{ monster.name }}</h3>
-      <span v-show="monster.rarity === 'common'" class="common-badge">🪨 Common</span>
-      <span v-show="monster.rarity === 'uncommon'" class="epic-badge">🍀 Epic</span>
-      <span v-show="monster.rarity === 'rare'" class="rare-badge">⭐ Rare</span>
-      <span v-show="monster.rarity === 'epic'" class="epic-badge">💎 Epic</span>
-      <span v-show="monster.rarity === 'legendary'" class="legendary-badge">🔥 Legendary</span>
-      <span v-show="monster.rarity === 'mythic'" class="mythic-badge">🌈 Mythic</span>
+      <select v-model="sortMethod">
+        <option value="none">None</option>
+        <option value="name">A → Z</option>
+        <option value="rarity">Rarity</option>
+      </select>
 
-      <button @click="deleteMonster(index)" class="delete-btn">Delete</button>
+      <select v-model="filterRarity">
+        <option value="all">All</option>
+        <option value="common">Common</option>
+        <option value="uncommon">Uncommon</option>
+        <option value="rare">Rare</option>
+        <option value="epic">Epic</option>
+        <option value="legendary">Legendary</option>
+        <option value="mythic">Mythic</option>
+      </select>
+
+      <div v-for="(monster, index) in sortedAndFiltered"
+          :key="index" 
+          class="monster-card"
+          :style="{ backgroundColor: monster.color }">
+        <h3>{{ monster.name }}</h3>
+        <span v-show="monster.rarity === 'common'" class="common-badge">🪨 Common</span>
+        <span v-show="monster.rarity === 'uncommon'" class="uncommon-badge">🍀 Uncommon</span>
+        <span v-show="monster.rarity === 'rare'" class="rare-badge">💎 Rare</span>
+        <span v-show="monster.rarity === 'epic'" class="epic-badge">💜 Epic</span>
+        <span v-show="monster.rarity === 'legendary'" class="legendary-badge">⭐ Legendary</span>
+        <span v-show="monster.rarity === 'mythic'" class="mythic-badge">🌈 Mythic</span>
+
+        <button @click="deleteMonster(index)" class="delete-btn">Delete</button>
+      </div>
 
     </div>
   </div>

@@ -1,0 +1,18 @@
+.app-container {
+  background: #B2B2B2;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  width: 700px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.app-container input,
+.app-container select,
+.add-button {
+  display: block;
+  width: 20%;
+  text-align: center;
+  margin: 10px auto;
+}

@@ -3,7 +3,10 @@ const App = Vue.createApp({
     return {
       newName: "",
       newColor: "#ffffffff",
-      newRarity: "common",
+      newRarity: "",
+
+      sortMethod: "none",
+      filterRarity: "all",
 
       palette: [
             "#FFD6E8", "#FFC7D9", "#FFB6C1",
@@ -38,7 +41,40 @@ const App = Vue.createApp({
 
       this.monsters.splice(index, 1);
     }
-  }
+  },
+
+  computed: {
+    sortedAndFiltered() {
+      let list = [...this.monsters];
+
+      if (this.filterRarity !== "all") {
+        list = list.filter(m => m.rarity === this.filterRarity);
+      }
+
+      if (this.sortMethod === "name") {
+        list.sort((a, b) => a.name.localeCompare(b.name));
+      }
+
+      if (this.sortMethod === "rarity") {
+        const order = {
+          common: 0,
+          uncommon: 1,
+          rare: 2,
+          epic: 3,
+          legendary: 4,
+          mythic: 5
+        };
+
+        list.sort((a, b) => {
+          const diff = order[a.rarity] - order[b.rarity];
+          if (diff !== 0) return diff;
+          return a.name.localeCompare(b.name);
+        });
+      }
+
+      return list;
+    }
+  },
 });
 
 App.mount('#app');
